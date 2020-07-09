@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from "./api";
 
-const API_URL = "http://192.168.15.2:8081/api/";
+const API_URL = "/api";
 
 interface Login {
   email: string;
@@ -16,7 +16,7 @@ interface Register {
 class AuthService {
   login({ email, password }: Login) {
     return axios
-      .post(API_URL + "signin", {
+      .post(API_URL + "/signin", {
         email,
         password
       })
@@ -33,7 +33,7 @@ class AuthService {
   }
 
   register({ name, email, password }: Register) {
-    return axios.post(API_URL + "signup", {
+    return axios.post(API_URL + "/signup", {
       name,
       email,
       password
@@ -48,7 +48,7 @@ class AuthService {
   }
 
   async checkUserName({ username }: { username: string}) {
-    const isAvailable = await axios.post(API_URL + "check", {
+    const isAvailable = await axios.post(API_URL + "/check", {
       email: username
     });
     return isAvailable?.data?.success;
